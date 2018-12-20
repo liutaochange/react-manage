@@ -35,6 +35,8 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
@@ -289,6 +291,23 @@ module.exports = {
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
+          },
+          {
+            test: lessRegex,
+            exclude: lessModuleRegex,
+            use: getStyleLoaders({
+              importLoaders: 3,
+            }, 'less-loader'),
+          },
+          {
+            test: lessModuleRegex,
+            use: getStyleLoaders({
+              importLoaders: 3,
+              modules: true,
+              getLocalIdent: getCSSModuleLocalIdent,
+            },
+            'less-loader'
+            ),
           },
           // Opt-in support for SASS (using .scss or .sass extensions).
           // Chains the sass-loader with the css-loader and the style-loader
