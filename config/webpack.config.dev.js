@@ -304,7 +304,11 @@ module.exports = {
             exclude: lessModuleRegex,
             use: getStyleLoaders({
               importLoaders: 3,
-            }, 'less-loader'),
+            }, 
+            {
+              loader: require.resolve('less-loader'),
+              options: { javascriptEnabled: true } 
+            }),
           },
           {
             test: lessModuleRegex,
@@ -313,8 +317,10 @@ module.exports = {
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             },
-            'less-loader'
-            ),
+            {
+              loader: require.resolve('less-loader'),
+              options: { javascriptEnabled: true } 
+            }),
           },
           // Opt-in support for SASS (using .scss or .sass extensions).
           // Chains the sass-loader with the css-loader and the style-loader

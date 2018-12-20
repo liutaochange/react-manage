@@ -93,6 +93,10 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         sourceMap: shouldUseSourceMap,
       },
     },
+    {
+      loader: require.resolve('less-loader'),
+      options: { javascriptEnabled: true } 
+    }
   ];
   if (preProcessor) {
     loaders.push({
