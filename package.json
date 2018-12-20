@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-dom": "^16.7.0",
-    "react-router-dom": "^4.3.1",
+    "antd": "^3.11.2",
     "axios": "^0.18.0",
-    "react": "^16.7.0"
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -66,11 +67,7 @@
   "babel": {
     "presets": [
       "react-app"
-    ],
-    "plugins": [["import", {
-      "libraryName": "antd",
-      "style": true
-    }]]
+    ]
   },
   "devDependencies": {
     "@babel/core": "7.1.0",

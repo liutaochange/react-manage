@@ -67,7 +67,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
           }),
         ],
       },
-    },
+    }
   ];
   if (preProcessor) {
     loaders.push(require.resolve(preProcessor));
@@ -233,6 +233,13 @@ module.exports = {
                     },
                   },
                 ],
+                [
+                  "import",
+                  {
+                    "libraryName": "antd",
+                    "style": true
+                  }
+                ]
               ],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/

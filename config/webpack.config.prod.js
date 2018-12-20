@@ -387,8 +387,12 @@ module.exports = {
               sourceMap: shouldUseSourceMap,
               getLocalIdent: getCSSModuleLocalIdent,
             },
-            'less-loader'
-            )
+            {
+              loader: 'less-loader',
+              options: {
+                javascriptEnabled: true
+              }
+            })
           },
           // Opt-in support for SASS. The logic here is somewhat similar
           // as in the CSS routine, except that "sass-loader" runs first

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 import './App.less';
 
 class App extends Component {
@@ -15,7 +16,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            <Button>Learn React</Button>
           </a>
         </header>
       </div>
