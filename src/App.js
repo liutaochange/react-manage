@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
 import './App.less';
+import Home from './pages/home/home.js'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Button>Learn React</Button>
-        </header>
-      </div>
+      <Home />
     );
   }
 }

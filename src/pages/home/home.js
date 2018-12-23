@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
+import './style.less'
 class Home extends Component {
   render() {
     return (
-      <div>
-        home
+      <div className='content'>
+        <Button>Learn React</Button>
       </div>
     )
   }
