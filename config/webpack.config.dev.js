@@ -65,14 +65,19 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
           }),
         ],
       },
-    },
-    {
-      loader: require.resolve('less-loader'),
-      options: { javascriptEnabled: true } 
     }
   ];
   if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
+    if (preProcessor === "less-loader") {
+      loaders.push({
+        loader: require.resolve(preProcessor),
+        options: {
+          javascriptEnabled: true
+        }
+      })
+    }else {
+      loaders.push(require.resolve(preProcessor));
+    }
   }
   return loaders;
 };
@@ -232,14 +237,7 @@ module.exports = {
                       svg: {
                         ReactComponent: '@svgr/webpack?-prettier,-svgo![path]',
                       },
-                    },
-                  },
-                ],
-                [
-                  "import",
-                  {
-                    "libraryName": "antd",
-                    "style": "css"
+                    }
                   }
                 ]
               ],
