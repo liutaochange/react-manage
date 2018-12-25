@@ -27,7 +27,6 @@ class Admin extends Component {
             collapsible
             collapsed={this.state.collapsed}
           >
-            <div className="logo" />
             <LeftNav />
           </Sider>
           <Layout>
