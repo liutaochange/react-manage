@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Divider } from 'antd';
+import { Menu } from 'antd';
 import menuList from '@/api/config';
 import './style.less';
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 class LeftNav extends Component {
   constructor(props) {
     super(props);
@@ -19,30 +18,28 @@ class LeftNav extends Component {
   }
   // 菜单渲染
   renderMenu = (list) => {
-
+    return list.map((item) => {
+      if (item.children) {
+        return (
+          <SubMenu  key={item.key} title={item.title}>
+            { this.renderMenu(item.children) }
+          </SubMenu>
+        )
+      }
+      return (
+        <Menu.Item key={item.key} title={item.title}>{item.title}</Menu.Item>
+      )
+    })
   }
   render() {
     return (
       <div>
         <div className="logo">
-          <img src={require('@/assets/images/logo-ant.svg')}/>
+          <img src={require('@/assets/images/logo-ant.svg')} alt=""/>
           <h1>Liutaochange</h1>
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-            <Menu.Item key="1">Option 1</Menu.Item>
-            <Menu.Item key="2">Option 2</Menu.Item>
-            <Menu.Item key="3">Option 3</Menu.Item>
-            <Menu.Item key="4">Option 4</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span>nav 3</span>
-          </Menu.Item>
+        <Menu theme="dark" mode="vertical" defaultSelectedKeys={['1']}>
+          {this.state.menuTreeNode}
         </Menu>
       </div>
     )
