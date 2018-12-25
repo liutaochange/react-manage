@@ -5,6 +5,22 @@ import './style.less';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 class LeftNav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuTreeNode: null
+    }
+  }
+  componentDidMount() {
+    let node = this.renderMenu(menuList);
+    this.setState({
+      menuTreeNode: node
+    })
+  }
+  // 菜单渲染
+  renderMenu = (list) => {
+
+  }
   render() {
     return (
       <div>
