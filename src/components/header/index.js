@@ -18,7 +18,6 @@ class Header extends Component {
       this.clock()
     }, 1000)
     getWeather().then((res) => {
-      console.log(res)
       let weather = res[0].weather_data[0].weather;
       let pm2 = res[0].pm25;
       let weatherUrl = res[0].weather_data[0].dayPictureUrl;
