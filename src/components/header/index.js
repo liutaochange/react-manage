@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { Row, Col, Icon } from 'antd';
-import styles from './style.module.less'
+import moment from 'moment';
+import { getWeather } from '@/api/index.js';
+import styles from './style.module.less';
 class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userName: '黄老邪'
+      userName: '黄老邪',
+      time: null
     }
+  }
+  componentDidMount() {
+    setInterval(() => {
+      this.clock()
+    }, 1000)
+    getWeather()
+  }
+  clock = () => {
+    this.setState(() => ({
+      time: moment().format('YYYY年MM月DD日 HH:mm:ss')
+    }))
   }
   render() {
     return (
@@ -25,7 +39,7 @@ class Header extends Component {
         <Row className={styles['header-item-weather']}>
           <Col span={4} className={styles.title}>首页</Col>
           <Col span={20} className={styles['header-text']}>
-            <span>2018-12-26</span>
+            <span>{this.state.time}</span>
             <span>晴转多云</span>
           </Col>
         </Row>

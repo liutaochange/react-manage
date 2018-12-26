@@ -12,9 +12,9 @@ class LeftNav extends Component {
   }
   componentDidMount() {
     let node = this.renderMenu(menuList);
-    this.setState({
+    this.setState(() => ({
       menuTreeNode: node
-    })
+    }))
   }
   // 菜单渲染
   renderMenu = (list) => {
