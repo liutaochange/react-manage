@@ -11,7 +11,7 @@ export const getWeather = () =>  {
   return new Promise((resolve, reject) => {
     jsonp(getWeatherUrl, {
       param: "callback"
-    }, function (error, response) {
+    }, (error, response) => {
       if (response.status === "success") {
         resolve(response.results)
       }else {
