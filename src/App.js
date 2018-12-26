@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Layout } from 'antd';
 import './App.less';
-import LeftNav from '@/components/leftnav/index.js'
-import Header from '@/components/header/index.js'
+import LeftNav from '@/components/leftnav/index.js';
+import Header from '@/components/header/index.js';
+import Footer from '@/components/footer/index.js';
 const { Sider, Content } = Layout;
 
-class Admin extends Component {
+class Admin extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -37,6 +38,7 @@ class Admin extends Component {
             }}
             >
               Content
+              <Footer/>
             </Content>
           </Layout>
         </Layout>

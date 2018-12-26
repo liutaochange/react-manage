@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Row, Col, Icon } from 'antd';
 import moment from 'moment';
 import { getWeather } from '@/api/index.js';
 import styles from './style.module.less';
-class Header extends Component {
+class Header extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
