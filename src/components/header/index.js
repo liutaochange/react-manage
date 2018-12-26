@@ -8,14 +8,27 @@ class Header extends Component {
     super(props)
     this.state = {
       userName: '黄老邪',
-      time: null
+      time: moment().format('YYYY年MM月DD日 HH:mm:ss'),
+      weather: '',
+      weatherUrl: ''
     }
   }
   componentDidMount() {
     setInterval(() => {
       this.clock()
     }, 1000)
-    getWeather()
+    getWeather().then((res) => {
+      console.log(res)
+      let weather = res[0].weather_data[0].weather;
+      let pm2 = res[0].pm25;
+      let weatherUrl = res[0].weather_data[0].dayPictureUrl;
+      this.setState(() => ({
+        weather: `天气状况：${weather}，pm指数：${pm2}`,
+        weatherUrl
+      }))
+    }).catch((err)=> {
+      console.log(err);
+    })
   }
   clock = () => {
     this.setState(() => ({
@@ -40,7 +53,8 @@ class Header extends Component {
           <Col span={4} className={styles.title}>首页</Col>
           <Col span={20} className={styles['header-text']}>
             <span>{this.state.time}</span>
-            <span>晴转多云</span>
+            <img src={this.state.weatherUrl} alt=""/>
+            <span>{this.state.weather}</span>
           </Col>
         </Row>
       </div>
