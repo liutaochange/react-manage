@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
 import menuList from '@/api/config';
-import './style.less';
+import styles from './style.module.less';
 const SubMenu = Menu.SubMenu;
 class LeftNav extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class LeftNav extends Component {
   render() {
     return (
       <div>
-        <div className="logo">
+        <div className={styles.logo}>
           <img src={require('@/assets/images/logo-ant.svg')} alt=""/>
           <h1>Liutaochange</h1>
         </div>

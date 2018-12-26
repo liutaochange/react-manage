@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 import './App.less';
 import LeftNav from '@/components/leftnav/index.js'
-const { Header, Sider, Content } = Layout;
+import Header from '@/components/header/index.js'
+const { Sider, Content } = Layout;
 
 class Admin extends Component {
   constructor(props) {
@@ -30,13 +31,7 @@ class Admin extends Component {
             <LeftNav />
           </Sider>
           <Layout>
-            <Header style={{ background: '#fff', padding: 0 }}>
-              <Icon
-                className="trigger"
-                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={this.toggle}
-              />
-            </Header>
+            <Header type={this.state.collapsed} toggle={this.toggle}/>
             <Content style={{
               margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
             }}
