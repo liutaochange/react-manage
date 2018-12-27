@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Layout } from 'antd';
-import { BrowserRouter } from 'react-router-dom';
 import LeftNav from '@/components/leftnav/index.js';
 import Header from '@/components/header/index.js';
 import Footer from '@/components/footer/index.js';
@@ -37,9 +36,7 @@ class Admin extends PureComponent {
               margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
             }}
             >
-              <BrowserRouter>
-                {this.props.children}
-              </BrowserRouter>
+            {this.props.children}
             </Content>
             <Footer />
           </Layout>
