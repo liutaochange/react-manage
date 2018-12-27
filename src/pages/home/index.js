@@ -4,7 +4,7 @@ import './style.less'
 class Home extends Component {
   render() {
     return (
-      <div className='content'>
+      <div className='home'>
         <Button>Learn React</Button>
       </div>
     )

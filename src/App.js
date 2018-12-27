@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Layout, Button } from 'antd';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Layout } from 'antd';
+import { BrowserRouter } from 'react-router-dom';
 import LeftNav from '@/components/leftnav/index.js';
 import Header from '@/components/header/index.js';
 import Footer from '@/components/footer/index.js';
@@ -32,18 +32,16 @@ class Admin extends PureComponent {
             <LeftNav />
           </Sider>
           <Layout>
-            <Header type={this.state.collapsed} toggle={this.toggle}/>
+            <Header type={this.state.collapsed} toggle={this.toggle} />
             <Content style={{
               margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
             }}
             >
               <BrowserRouter>
-                <Link to="/button">
-                  <Button >learn react</Button>
-                </Link>
+                {this.props.children}
               </BrowserRouter>
-              <Footer/>
             </Content>
+            <Footer />
           </Layout>
         </Layout>
       </div>
