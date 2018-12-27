@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Layout } from 'antd';
-import './App.less';
+import { Layout, Button } from 'antd';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import LeftNav from '@/components/leftnav/index.js';
 import Header from '@/components/header/index.js';
 import Footer from '@/components/footer/index.js';
+import './App.less';
 const { Sider, Content } = Layout;
-
 class Admin extends PureComponent {
   constructor(props) {
     super(props)
@@ -37,7 +37,11 @@ class Admin extends PureComponent {
               margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
             }}
             >
-              Content
+              <BrowserRouter>
+                <Link to="/button">
+                  <Button >learn react</Button>
+                </Link>
+              </BrowserRouter>
               <Footer/>
             </Content>
           </Layout>
