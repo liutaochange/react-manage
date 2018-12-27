@@ -6,9 +6,9 @@ class Loading extends PureComponent {
   render() {
     return (
       <div className={styles.loading}>
-        <Spin indicator={antIcon} className={styles.spin}/>
+        <Spin indicator={antIcon} className={styles.spin} />
       </div>
     )
   }
 }
-export default Loading
+export default Loading;

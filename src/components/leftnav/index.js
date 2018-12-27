@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Menu } from 'antd';
 import menuList from '@/api/config';
 import styles from './style.module.less';
+import { NavLink } from 'react-router-dom';
 const SubMenu = Menu.SubMenu;
 class LeftNav extends PureComponent {
   constructor(props) {
@@ -21,13 +22,15 @@ class LeftNav extends PureComponent {
     return list.map((item) => {
       if (item.children) {
         return (
-          <SubMenu  key={item.key} title={item.title}>
-            { this.renderMenu(item.children) }
+          <SubMenu key={item.key} title={item.title}>
+            {this.renderMenu(item.children)}
           </SubMenu>
         )
       }
       return (
-        <Menu.Item key={item.key} title={item.title}>{item.title}</Menu.Item>
+        <Menu.Item key={item.key} title={item.title}>
+          <NavLink to={item.key}>{item.title}</NavLink>
+        </Menu.Item>
       )
     })
   }
@@ -35,7 +38,7 @@ class LeftNav extends PureComponent {
     return (
       <div>
         <div className={styles.logo}>
-          <img src={require('@/assets/images/logo-ant.svg')} alt=""/>
+          <img src={require('@/assets/images/logo-ant.svg')} alt="" />
           <h1>Liutaochange</h1>
         </div>
         <Menu theme="dark" mode="vertical" defaultSelectedKeys={['1']}>
@@ -45,4 +48,4 @@ class LeftNav extends PureComponent {
     )
   }
 }
-export default LeftNav
+export default LeftNav;
