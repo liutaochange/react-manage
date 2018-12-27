@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Menu } from 'antd';
 import menuList from '@/api/config';
 import styles from './style.module.less';
 const SubMenu = Menu.SubMenu;
-class LeftNav extends Component {
+class LeftNav extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
