@@ -21,7 +21,7 @@ class Home extends Component {
     }
     //设置canvas宽高
     resizeCanvas();
-
+    window.onresize = resizeCanvas;
     let num = 100;//气泡数量
     let ballX = [];//球心的横坐标
     let ballY = [];//球心的纵坐标
