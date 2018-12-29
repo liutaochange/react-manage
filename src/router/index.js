@@ -5,6 +5,7 @@ const Admin = lazy(() => import('@/App.js'));
 const Login = lazy(() => import('@/pages/login/index.js'));
 const Nomatch = lazy(() => import('@/pages/nomatch/index.js'));
 const Home = lazy(() => import('@/pages/home/index.js'));
+const Button = lazy(() => import('@/pages/ui/button/index.js'));
 const Routers = () => (
   <Router>
     <Suspense fallback={<Loading />}>
@@ -14,6 +15,7 @@ const Routers = () => (
           <Admin>
             <Switch>
               <Route exact path="/home" component={props => <Home {...props} />} />
+              <Route exact path="/ui/buttons" component={props => <Button {...props} />} />
               <Redirect to="/home" />
             </Switch>
           </Admin>
