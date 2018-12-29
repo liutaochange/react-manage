@@ -33,7 +33,7 @@ class Admin extends PureComponent {
           <Layout>
             <Header type={this.state.collapsed} toggle={this.toggle} />
             <Content style={{
-              margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
+              margin: '24px 16px', padding: 24, background: '#fff', overflow: 'hidden', boxSizing: 'border-box', position: 'relative'
             }}
             >
             {this.props.children}
