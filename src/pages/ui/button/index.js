@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Card, Button, Icon, Radio } from "antd";
 import styles from "./style.module.less";
 const ButtonGroup = Button.Group;
-class Buttons extends Component {
+class Buttons extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
