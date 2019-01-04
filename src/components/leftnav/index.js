@@ -3,7 +3,6 @@ import { Menu } from 'antd';
 import menuList from '@/api/config';
 import styles from './style.module.less';
 import { NavLink } from 'react-router-dom';
-const SubMenu = Menu.SubMenu;
 class LeftNav extends PureComponent {
   constructor(props) {
     super(props);
@@ -16,9 +15,9 @@ class LeftNav extends PureComponent {
     return list.map((item) => {
       if (item.children) {
         return (
-          <SubMenu key={item.key} title={item.title}>
+          <Menu.SubMenu key={item.key} title={item.title}>
             {this.renderMenu(item.children)}
-          </SubMenu>
+          </Menu.SubMenu>
         )
       }
       return (

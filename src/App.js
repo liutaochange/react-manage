@@ -9,7 +9,7 @@ class Admin extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      collapsed: false,
+      collapsed: false
     }
   }
 
