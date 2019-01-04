@@ -19,32 +19,32 @@ class Modals extends PureComponent {
   }
 
   handleConfirm = (type) => {
-    // Modal[type]({
-    //   title: '确认？',
-    //   content: '你确定你学会了React了吗？',
-    //   onOk() {
-    //     console.log('Ok')
-    //   },
-    //   onCancel() {
-    //     console.log('Cancel')
-    //   }
-    // })
+    Modal[type]({
+      title: '确认？',
+      content: '你确定你学会了React了吗？',
+      onOk() {
+        console.log('Ok')
+      },
+      onCancel() {
+        console.log('Cancel')
+      }
+    })
   }
 
   render() {
     return (
-      <div className={styles.buttonwamp}>
+      <div className={styles.modals}>
         <Card title="基础按钮" style={{ marginBottom: "10px" }}>
-          <Button type="primary" onClick={this.handleOpen('showModal1')}>Open</Button>
-          <Button type="primary" onClick={this.handleOpen('showModal2')}>自定义页脚</Button>
-          <Button type="primary" onClick={this.handleOpen('showModal3')}>顶部20px弹框</Button>
-          <Button type="primary" onClick={this.handleOpen('showModal4')}>水平垂直居中</Button>
+          <Button type="primary" onClick={() => {this.handleOpen('showModal1')}}>Open</Button>
+          <Button type="primary" onClick={() => {this.handleOpen('showModal2')}}>自定义页脚</Button>
+          <Button type="primary" onClick={() => {this.handleOpen('showModal3')}}>顶部50px弹框</Button>
+          <Button type="primary" onClick={() => {this.handleOpen('showModal4')}}>水平垂直居中</Button>
         </Card>
         <Card title="信息确认框" style={{ marginBottom: "10px" }}>
-          <Button type="primary" onClick={this.handleConfirm('confirm')}>Confirm</Button>
-          <Button type="primary" onClick={this.handleConfirm('info')}>Info</Button>
-          <Button type="primary" onClick={this.handleConfirm('success')}>Success</Button>
-          <Button type="primary" onClick={this.handleConfirm('warning')}>Warning</Button>
+          <Button type="primary" onClick={() => {this.handleConfirm('confirm')}}>Confirm</Button>
+          <Button type="primary" onClick={() => {this.handleConfirm('info')}}>Info</Button>
+          <Button type="primary" onClick={() => {this.handleConfirm('success')}}>Success</Button>
+          <Button type="primary" onClick={() => {this.handleConfirm('warning')}}>Warning</Button>
         </Card>
         <Modal
           title="Basic Modal"
@@ -74,7 +74,7 @@ class Modals extends PureComponent {
         </Modal>
         <Modal
           title="React"
-          style={{ top: 20 }}
+          style={{ top: 50 }}
           visible={this.state.showModal3}
           onCancel={() => {
             this.setState({

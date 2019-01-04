@@ -8,14 +8,8 @@ class LeftNav extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      menuTreeNode: null
+      menuTreeNode: this.renderMenu(menuList)
     }
-  }
-  componentDidMount() {
-    let node = this.renderMenu(menuList);
-    this.setState(() => ({
-      menuTreeNode: node
-    }))
   }
   // 菜单渲染
   renderMenu = (list) => {

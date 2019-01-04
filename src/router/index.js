@@ -7,6 +7,7 @@ const Nomatch = lazy(() => import('@/pages/nomatch/index.js'));
 const Home = lazy(() => import('@/pages/home/index.js'));
 const Button = lazy(() => import('@/pages/ui/button/index.js'));
 const Modal = lazy(() => import('@/pages/ui/modal/index.js'));
+const Spin = lazy(() => import('@/pages/ui/spin/index.js'));
 const Routers = () => (
   <Router>
     <Suspense fallback={<Loading />}>
@@ -18,6 +19,7 @@ const Routers = () => (
               <Route exact path="/home" component={props => <Home {...props} />} />
               <Route exact path="/ui/buttons" component={props => <Button {...props} />} />
               <Route exact path="/ui/modals" component={props => <Modal {...props} />} />
+              <Route exact path="/ui/loadings" component={props => <Spin {...props} />} />
               <Redirect to="/home" />
             </Switch>
           </Admin>
