@@ -14,20 +14,18 @@ const Routers = () => (
   <Router>
     <Suspense fallback={<Loading />}>
       <Switch>
+        <Route path="/" component={props => <Admin {...props} />}>
+          <Switch>
+            <Route exact path="home" component={props => <Home {...props} />} />
+            <Route exact path="ui/buttons" component={props => <Button {...props} />} />
+            <Route exact path="ui/modals" component={props => <Modal {...props} />} />
+            <Route exact path="ui/loadings" component={props => <Spin {...props} />} />
+            <Route exact path="ui/notification" component={props => <Notification {...props} />} />
+            <Route exact path="ui/messages" component={props => <Message {...props} />} />
+            <Redirect to="home" />
+          </Switch>
+        </Route>
         <Route exact path="/login" component={props => <Login {...props} />} />
-        <Route path="/" render={() =>
-          <Admin>
-            <Switch>
-              <Route exact path="/home" component={props => <Home {...props} />} />
-              <Route exact path="/ui/buttons" component={props => <Button {...props} />} />
-              <Route exact path="/ui/modals" component={props => <Modal {...props} />} />
-              <Route exact path="/ui/loadings" component={props => <Spin {...props} />} />
-              <Route exact path="/ui/notification" component={props => <Notification {...props} />} />
-              <Route exact path="/ui/messages" component={props => <Message {...props} />} />
-              <Redirect to="/home" />
-            </Switch>
-          </Admin>
-        } />
         <Route component={props => <Nomatch {...props} />} />
       </Switch>
     </Suspense>
