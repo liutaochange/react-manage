@@ -9,7 +9,7 @@ const Button = lazy(() => import('@/pages/ui/button/index.js'));
 const Modal = lazy(() => import('@/pages/ui/modal/index.js'));
 const Spin = lazy(() => import('@/pages/ui/spin/index.js'));
 const Notification = lazy(() => import('@/pages/ui/notification/index.js'));
-
+const Message = lazy(() => import('@/pages/ui/message/index.js'));
 const Routers = () => (
   <Router>
     <Suspense fallback={<Loading />}>
@@ -23,6 +23,7 @@ const Routers = () => (
               <Route exact path="/ui/modals" component={props => <Modal {...props} />} />
               <Route exact path="/ui/loadings" component={props => <Spin {...props} />} />
               <Route exact path="/ui/notification" component={props => <Notification {...props} />} />
+              <Route exact path="/ui/messages" component={props => <Message {...props} />} />
               <Redirect to="/home" />
             </Switch>
           </Admin>
