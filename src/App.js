@@ -12,6 +12,7 @@ const Modal = lazy(() => import('@/pages/ui/modal/index.js'));
 const Spin = lazy(() => import('@/pages/ui/spin/index.js'));
 const Notification = lazy(() => import('@/pages/ui/notification/index.js'));
 const Message = lazy(() => import('@/pages/ui/message/index.js'));
+const Tabs = lazy(() => import('@/pages/ui/tabs/index.js'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -52,7 +53,8 @@ class Admin extends PureComponent {
                 <Route exact path="/ui/loadings" component={props => <Spin {...props} />} />
                 <Route exact path="/ui/notification" component={props => <Notification {...props} />} />
                 <Route exact path="/ui/messages" component={props => <Message {...props} />} />
-                <Redirect to="home" />
+                <Route exact path="/ui/tabs" component={props => <Tabs {...props} />} />
+                <Redirect to="/home" />
               </Switch>
             </Suspense>
             </Content>
