@@ -40,8 +40,7 @@ class Message extends PureComponent {
 
   add = () => {
     const panes = this.state.panes;
-    let num = this.state.newTabIndex;
-    const activeKey = `newTab${num++}`;
+    const activeKey = `newTab${this.state.newTabIndex++}`;
     panes.push({ title: activeKey, content: 'New Tab Pane', key: activeKey });
     this.setState({ panes, activeKey });
   }

@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loading from '@/components/loading/index.js';
 const Admin = lazy(() => import('@/App.js'));
 const Login = lazy(() => import('@/pages/login/index.js'));
