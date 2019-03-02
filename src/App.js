@@ -15,6 +15,7 @@ const Message = lazy(() => import('@/pages/ui/message/index.js'));
 const Tabs = lazy(() => import('@/pages/ui/tabs/index.js'));
 const Gallery = lazy(() => import('@/pages/ui/gallery/index.js'));
 const Carousels = lazy(() => import('@/pages/ui/carousel/index.js'));
+const Login = lazy(() => import('@/pages/form/login/index.js'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -58,6 +59,7 @@ class Admin extends PureComponent {
                 <Route exact path="/ui/tabs" component={props => <Tabs {...props} />} />
                 <Route exact path="/ui/gallery" component={props => <Gallery {...props} />} />
                 <Route exact path="/ui/carousel" component={props => <Carousels {...props} />} />
+                <Route exact path="/form/login" component={props => <Login {...props} />} />
                 <Redirect to="/home" />
               </Switch>
             </Suspense>
