@@ -4,9 +4,10 @@ import style from './style.module.less';
 const FormItem = Form.Item;
 class Login extends PureComponent {
   render() {
+    let { getFieldDecorator } = this.props.form
     return (
       <div className={style.login}>
-        <Card title="行内内联表单">
+        <Card title="登录内联表单">
           <Form layout="inline">
             <FormItem>
               <Input placeholder="请输入用户名" type="text" />
@@ -19,8 +20,37 @@ class Login extends PureComponent {
             </FormItem>
           </Form>
         </Card>
+        <Card title="登录水平表单" style={{marginTop: '20px'}}>
+          <Form layout="horizontal" style={{width: '300px'}}>
+            <FormItem>
+              {
+                getFieldDecorator('user', {
+                  initialValue: '黄老邪',
+                  rules: []
+                })(
+                  <Input placeholder="请输入用户名" type="text" />
+                )
+              }
+            </FormItem>
+            <FormItem>
+              {
+                getFieldDecorator('password', {
+                  initialValue: '123456',
+                  rules: []
+                })(
+                  <Input placeholder="请输入密码" type="password" />
+                )
+              }
+              
+            </FormItem>
+            <FormItem>
+              <Button type="primary">提交</Button>
+            </FormItem>
+          </Form>
+        </Card>
       </div>
     )
   }
 }
-export default Login;
+const LoginForm =  Form.create()(Login);
+export default LoginForm;

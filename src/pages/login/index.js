@@ -4,7 +4,7 @@ class Login extends Component {
   render() {
     return (
       <div className={style.login}>
-       this is login
+        this is login
       </div>
     )
   }
