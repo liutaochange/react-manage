@@ -27,7 +27,8 @@ class Login extends PureComponent {
                 getFieldDecorator('user', {
                   initialValue: '黄老邪',
                   rules: [{
-                    required: true
+                    required: true,
+                    message: '用户名不能为空'
                   }]
                 })(
                   <Input placeholder="请输入用户名" type="text" />
@@ -38,7 +39,10 @@ class Login extends PureComponent {
               {
                 getFieldDecorator('password', {
                   initialValue: '123456',
-                  rules: []
+                  rules: [{
+                    required: true,
+                    message: '密码名不能为空'
+                  }]
                 })(
                   <Input placeholder="请输入密码" type="password" />
                 )
