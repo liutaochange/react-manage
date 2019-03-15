@@ -1,7 +1,8 @@
-import jsonp from 'jsonp';
+import jsonp from 'jsonp'
+import axios from 'axios'
 // 借助百度天气平台，获取天气信息
 // http://api.map.baidu.com/telematics/v3/weather?location=beijing&output=json&ak=OKG1ID0vk0VxL1k6UWpvklFHSu5Ot4vG
-const getWeatherUrl = 'http://api.map.baidu.com/telematics/v3/weather?location=beijing&output=json&ak=OKG1ID0vk0VxL1k6UWpvklFHSu5Ot4vG';
+const getWeatherUrl = 'http://api.map.baidu.com/telematics/v3/weather?location=beijing&output=json&ak=OKG1ID0vk0VxL1k6UWpvklFHSu5Ot4vG'
 export const getWeather = () =>  {
   return new Promise((resolve, reject) => {
     jsonp(getWeatherUrl, {
@@ -15,3 +16,10 @@ export const getWeather = () =>  {
     })
   })
 }
+// 借助easy mock来生成mock数据
+const request = axios.create({
+  baseURL: 'https://easy-mock.com/mock/5c8afe8eb93d13036553c79a/manage',
+  timeout: 10000
+})
+
+export const getTableList = () => request.get('/table/list')

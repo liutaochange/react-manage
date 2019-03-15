@@ -17,7 +17,7 @@ const Gallery = lazy(() => import('@/pages/ui/gallery/index.js'));
 const Carousels = lazy(() => import('@/pages/ui/carousel/index.js'));
 const Login = lazy(() => import('@/pages/form/login/index.js'));
 const Register = lazy(() => import('@/pages/form/register/index.js'));
-const basicTable = lazy(() => import('@/pages/table/basicTable/index.js'));
+const BaseTable = lazy(() => import('@/pages/table/baseTable/index.js'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -63,7 +63,7 @@ class Admin extends PureComponent {
                 <Route exact path="/ui/carousel" component={props => <Carousels {...props} />} />
                 <Route exact path="/form/login" component={props => <Login {...props} />} />
                 <Route exact path="/form/reg" component={props => <Register {...props} />} />
-                <Route exact path="/table/basic" component={props => <basicTable {...props} />} />
+                <Route exact path="/table/basic" component={props => <BaseTable {...props} />} />
                 <Redirect to="/home" />
               </Switch>
             </Suspense>
