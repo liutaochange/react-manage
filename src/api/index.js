@@ -18,8 +18,9 @@ export const getWeather = () =>  {
 }
 // 借助easy mock来生成mock数据
 const request = axios.create({
-  baseURL: 'https://easy-mock.com/mock/5c8afe8eb93d13036553c79a/manage',
-  timeout: 10000
+  baseURL: 'https://easy-mock.com/mock/5c8afe8eb93d13036553c79a/manage'
 })
-
+// 基础表格的模拟数据
 export const getTableList = () => request.get('/table/list')
+// 高级表格的模拟数据
+export const getTableHighList = () => request.get('/table/highList')
