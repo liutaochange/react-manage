@@ -20,6 +20,7 @@ const Register = lazy(() => import('@/pages/form/register/index.js'));
 const BaseTable = lazy(() => import('@/pages/table/baseTable/index.js'));
 const HighTable = lazy(() => import('@/pages/table/highTable/index.js'));
 const City = lazy(() => import('@/pages/city/manage/index.js'));
+const Order = lazy(() => import('@/pages/order/index.js'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -68,6 +69,7 @@ class Admin extends PureComponent {
                 <Route exact path="/table/basic" component={props => <BaseTable {...props} />} />
                 <Route exact path="/table/high" component={props => <HighTable {...props} />} />
                 <Route exact path="/city" component={props => <City {...props} />} />
+                <Route exact path="/order" component={props => <Order {...props} />} />
                 <Redirect to="/home" />
               </Switch>
             </Suspense>
