@@ -33,3 +33,5 @@ export const getTableHighList = () => request.get("/table/highList");
 export const cityManage = () => request.get("/open/list");
 // 城市管理的开通城市接口
 export const openCity = params => request.get("/city/open", { data: { params } });
+// 订单管理模拟数据接口
+export const orderList = () => request.get('/order/list');
