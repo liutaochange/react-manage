@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import { Card, Button, Table, Form, Select, Modal, message } from "antd";
-import { orderList } from "@/api/index";
+import { Card, Button, Table, Form, Select, Modal, message, DatePicker  } from "antd";
+import { orderList, orderRoute, finishOrder } from "@/api/index";
 import utils from "@/assets/utils/index"
 import style from "./style.module.less";
 const FormItem = Form.Item;
@@ -10,16 +10,26 @@ class Order extends PureComponent {
     super(props)
     this.state = {
       list: [],
-      pagination: utils.pagination
+      pagination: utils.pagination,
+      visible: false,
+      orderInfo: {},
+      selectedItem: {},
+      selectedRowKeys: []
     }
   }
   componentDidMount () {
+    this.getTableData()
+  }
+  
+  // 获取表格数据
+  getTableData = () => {
     orderList().then((res) => {
       console.log(res)
       if (res.data.code === '0') {
         res.data.data.item_list.map((item, index) => item.key = index)
         this.setState({
-          list: res.data.data.item_list
+          list: res.data.data.item_list,
+          selectedRowKeys: []
         })
       } else {
         message.error('请求失败，请重试')
@@ -27,6 +37,64 @@ class Order extends PureComponent {
     }).catch((err) => {
       message.error(`请求失败：${err}`)
     })
+  }
+  // 点击关闭模态框
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
+  // 点击确认结束订单
+  handleFinishOrder = () => {
+    finishOrder().then((res) => {
+      console.log(res)
+      if (res.data.code === '0') {
+        message.success('订单终止成功')
+        this.setState({
+          visible: false
+        })
+        this.getTableData()
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+  // 点击打开对话框
+  stopOrder = () => {
+    let selectedItem = this.state.selectedItem;
+    console.log(selectedItem)
+    if (!selectedItem.id) {
+      Modal.info({
+        title: '提示',
+        content: '请先选择一条订单'
+      })
+      return
+    }
+    orderRoute().then((res) => {
+      console.log(res)
+      if (res.data.code === '0') {
+        this.setState({
+          visible: true,
+          orderInfo: res.data.data
+        })
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+  onTableClick = (record, index) => {
+    let selectKey = [index]
+    this.setState({
+      selectedRowKeys: selectKey,
+      selectedItem: record
+    })
+  }
+  onSelectChange = (selectedRowKeys, selectedRows) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ 
+      selectedRowKeys,
+      selectedItem: selectedRows[0]
+    });
   }
   render() {
     const columns = [
@@ -78,14 +146,28 @@ class Order extends PureComponent {
         dataIndex: "user_pay"
       }
     ];
+    const formItemLayout = {
+      labelCol: {
+        span: 5
+      },
+      wrapperCol: {
+        span: 18
+      }
+    }
+    let { selectedRowKeys } = this.state
+    const rowSelection = {
+      type: 'radio',
+      selectedRowKeys,
+      onChange: this.onSelectChange
+    }
     return (
       <div className={style.order}>
         <Card title="城市管理">
           <FilterForm />
         </Card>
-        <Card style={{ marginTop: "10px" }}>
-          <Button type="primary">订单详情</Button>
-          <Button type="primary">结束订单</Button>
+        <Card style={{ margin: "5px 0" }}>
+          <Button type="primary" >订单详情</Button>
+          <Button type="primary" onClick={this.stopOrder}>结束订单</Button>
         </Card>
         <div className="content-wrap">
           <Table
@@ -93,8 +175,38 @@ class Order extends PureComponent {
             columns={columns}
             dataSource={this.state.list}
             pagination={this.state.pagination}
+            rowSelection={rowSelection}
+            onRow={(record, index) => {
+              return {
+                onClick: () => {
+                  this.onTableClick(record, index)   // 点击行
+                },       
+              };
+            }}
           />
         </div>
+        <Modal
+          title="结束订单"
+          visible={this.state.visible}
+          onOk={this.handleFinishOrder}
+          onCancel={this.handleCancel}
+          width="600px"
+        >
+          <Form layout="horizontal">
+            <FormItem label="车辆编号" {...formItemLayout}>
+              {this.state.orderInfo.bike_sn}
+            </FormItem>
+            <FormItem label="剩余电量" {...formItemLayout}>
+              {this.state.orderInfo.battery}
+            </FormItem>
+            <FormItem label="开始时间" {...formItemLayout}>
+              {this.state.orderInfo.start_time}
+            </FormItem>
+            <FormItem label="当前位置" {...formItemLayout}>
+              {this.state.orderInfo.location}
+            </FormItem>
+          </Form>
+        </Modal>
       </div>
     );
   }
@@ -114,30 +226,21 @@ class FilterForm extends React.Component {
             </Select>
           )}
         </FormItem>
-        <FormItem label="用车模式">
-          {getFieldDecorator("mode")(
-            <Select style={{ width: 120 }} placeholder="全部">
-              <Option value="">全部</Option>
-              <Option value="1">指定停车点模式</Option>
-              <Option value="2">禁停区模式</Option>
-            </Select>
+        <FormItem label="订单时间">
+          {getFieldDecorator("start_time")(
+            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>
+          )}
+          &nbsp;&nbsp;
+          {getFieldDecorator("end_time")(
+            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>
           )}
         </FormItem>
-        <FormItem label="营运模式">
+        <FormItem label="订单状态">
           {getFieldDecorator("op_mode")(
             <Select style={{ width: 80 }} placeholder="全部">
               <Option value="">全部</Option>
-              <Option value="1">自营</Option>
-              <Option value="2">加盟</Option>
-            </Select>
-          )}
-        </FormItem>
-        <FormItem label="加盟商授权状态">
-          {getFieldDecorator("auth_status")(
-            <Select style={{ width: 100 }} placeholder="全部">
-              <Option value="">全部</Option>
-              <Option value="1">已授权</Option>
-              <Option value="2">未授权</Option>
+              <Option value="1">进行中</Option>
+              <Option value="2">结束申请</Option>
             </Select>
           )}
         </FormItem>
