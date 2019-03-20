@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { Card, Button, Table, Form, Select, Modal, message } from "antd";
 import { orderList } from "@/api/index";
+import utils from "@/assets/utils/index"
 import style from "./style.module.less";
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -8,7 +9,8 @@ class Order extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      list: []
+      list: [],
+      pagination: utils.pagination
     }
   }
   componentDidMount () {
@@ -82,8 +84,8 @@ class Order extends PureComponent {
           <FilterForm />
         </Card>
         <Card style={{ marginTop: "10px" }}>
-          <Button>订单详情</Button>
-          <Button>结束订单</Button>
+          <Button type="primary">订单详情</Button>
+          <Button type="primary">结束订单</Button>
         </Card>
         <div className="content-wrap">
           <Table
