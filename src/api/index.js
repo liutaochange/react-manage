@@ -35,7 +35,8 @@ export const cityManage = () => request.get("/open/list");
 export const openCity = params => request.get("/city/open", { data: { params } });
 // 订单管理模拟数据接口
 export const orderList = () => request.get("/order/list");
-// 订单管理-结束行程
+// 订单管理-行程信息
 export const orderRoute = () => request.get("/order/backinfo");
 // 订单管理-结束订单
 export const finishOrder = () => request.get("/finish/order");
+// 订单管理-订单详情

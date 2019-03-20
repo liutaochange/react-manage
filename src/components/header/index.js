@@ -35,27 +35,46 @@ class Header extends PureComponent {
     }))
   }
   render() {
+    const { menuType } = this.props;
     return (
       <div className={styles['header-wamp']}>
-        <Icon
-          className={styles.trigger}
-          type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={this.props.toggle}
-        />
-        <Row className={styles['header-item']}>
-          <Col span={24}>
+        {
+          menuType ? '' : (
+            <Icon
+              className={styles.trigger}
+              type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.props.toggle}
+            />
+          )
+        }
+        <Row className={ menuType ? styles['header-top'] : styles['header-item']}>
+          {
+            menuType ? (
+              <Col span={6}>
+                <div className={styles['header-logo']}>
+                  <img src={require('@/assets/images/logo-ant.svg')} alt="" />
+                  <h1>Liutaochange 管理系统</h1>
+                </div>
+              </Col>
+            ) : ''
+          }
+          <Col span={menuType ? 18 : 24}>
             <span>欢迎： {this.state.userName}</span>
             <a href="www.baidu.com" >退出</a>
           </Col>
         </Row>
-        <Row className={styles['header-item-weather']}>
-          <Col span={4} className={styles.title}>首页</Col>
-          <Col span={20} className={styles['header-text']}>
-            <span>{this.state.time}</span>
-            <img src={this.state.weatherUrl} alt=""/>
-            <span>{this.state.weather}</span>
-          </Col>
-        </Row>
+        {
+          menuType ? '' : (
+            <Row className={styles['header-item-weather']}>
+              <Col span={4} className={styles.title}>首页</Col>
+              <Col span={20} className={styles['header-text']}>
+                <span>{this.state.time}</span>
+                <img src={this.state.weatherUrl} alt=""/>
+                <span>{this.state.weather}</span>
+              </Col>
+            </Row>
+          )
+        }
       </div>
     )
   }

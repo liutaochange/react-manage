@@ -59,10 +59,20 @@ class Order extends PureComponent {
       console.log(err)
     })
   }
+  openDetail = () => {
+    let selectedItem = this.state.selectedItem;
+    if (!selectedItem.id) {
+      Modal.info({
+        title: '提示',
+        content: '请先选择一条订单'
+      })
+      return
+    }
+    window.location.href=`/order/detail-${selectedItem.id}.html`
+  }
   // 点击打开对话框
   stopOrder = () => {
     let selectedItem = this.state.selectedItem;
-    console.log(selectedItem)
     if (!selectedItem.id) {
       Modal.info({
         title: '提示',
@@ -166,7 +176,7 @@ class Order extends PureComponent {
           <FilterForm />
         </Card>
         <Card style={{ margin: "5px 0" }}>
-          <Button type="primary" >订单详情</Button>
+          <Button type="primary" onClick={this.openDetail}>订单详情</Button>
           <Button type="primary" onClick={this.stopOrder}>结束订单</Button>
         </Card>
         <div className="content-wrap">
