@@ -40,3 +40,4 @@ export const orderRoute = () => request.get("/order/backinfo");
 // 订单管理-结束订单
 export const finishOrder = () => request.get("/finish/order");
 // 订单管理-订单详情
+export const orderDetail = (orderId) => request.get("/order/detail", {data: {orderId}});
