@@ -8,7 +8,8 @@ class Details extends PureComponent {
     super(props);
     this.state = {
       orderId: props.match.params.orderId || "",
-      orderInfo: {}
+      orderInfo: {},
+      ak: 'OKG1ID0vk0VxL1k6UWpvklFHSu5Ot4vG'
     };
   }
   componentDidMount() {

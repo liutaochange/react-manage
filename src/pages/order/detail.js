@@ -2,12 +2,40 @@ import React, { Component } from "react";
 import { Card } from "antd";
 import style from './details.module.less';
 class DetailContent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      map: {}
+    }
+  }
+  componentDidMount() {
+    this.initBMap()
+  }
+  initBMap = () => {
+    const { BMap } = window
+    let map = new BMap.Map("orderDetailMapWamp"); // 创建地图实例 
+    const point = new BMap.Point(116.404, 39.915); // 创建点坐标  
+    map.centerAndZoom(point, 15);
+    this.setState({
+      map
+    }, () => {
+      this.addBMapWidget()
+    })
+  } 
+  addBMapWidget = () => {
+    const { BMap, BMAP_ANCHOR_TOP_LEFT, BMAP_ANCHOR_TOP_RIGHT } = window
+    console.log(BMAP_ANCHOR_TOP_LEFT)
+    console.log(BMAP_ANCHOR_TOP_RIGHT)
+    let map = this.state.map
+    map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT}));
+    map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_RIGHT}));
+  }
   render() {
     let info = this.props.info || {};
     return (
       <div>
         <Card>
-          <div id="orderDetailMap" className="order-map" />
+          <div id="orderDetailMapWamp" className={style['details-order-map']} />
           <div className={style['detail-items']}>
             <div className={style['item-title']}>基础信息</div>
             <ul className={style['detail-form']}>
