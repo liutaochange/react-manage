@@ -7,7 +7,10 @@ class DetailContent extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.info.position_list.length > 0) {
+      // 调用绘制用户的行驶路线方法
       this.drawUserPath(nextProps.info.position_list)
+      // 调用服务区绘制方法
+      this.drwaServiceArea(nextProps.info.area);
     }
   }
   // 初始化地图
@@ -71,6 +74,26 @@ class DetailContent extends Component {
       console.log(this.map)
     }
   };
+
+  // 绘制服务区
+  drwaServiceArea = (positionList)=>{
+    // 连接路线图
+    let trackPoint = [];
+    for (let i = 0; i < positionList.length; i++) {
+        let point = positionList[i];
+        trackPoint.push(new window.BMap.Point(point.lon, point.lat));
+    }
+    // 绘制服务区
+    let polygon = new window.BMap.Polygon(trackPoint, {
+        strokeColor: '#CE0000',
+        strokeWeight: 4,
+        strokeOpacity: 1,
+        fillColor: '#ff8605',
+        fillOpacity:0.4
+    })
+    this.map.addOverlay(polygon);
+  }
+
   render() {
     let info = this.props.info || {};
     return (
