@@ -49,3 +49,5 @@ export const deleteUser = () => request.get("/delete/user");
 export const updateUser = () => request.get("/update/user");
 // 用户管理-增加用户
 export const addUser = () => request.get("/add/user");
+// 车辆管理-车辆地图
+export const bikeMap = () => request.get("/bike/list");
