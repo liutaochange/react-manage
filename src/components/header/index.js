@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Row, Col, Icon } from 'antd';
 import moment from 'moment';
 import { getWeather } from '@/api/index.js';
+import { withRouter } from 'react-router-dom';
 import styles from './style.module.less';
 class Header extends PureComponent {
   constructor(props) {
@@ -66,7 +67,7 @@ class Header extends PureComponent {
         {
           menuType ? '' : (
             <Row className={styles['header-item-weather']}>
-              <Col span={4} className={styles.title}>首页</Col>
+              <Col span={4} className={styles.title}>{this.props.location.pathname === '/home' ? '首页' : ''}</Col>
               <Col span={20} className={styles['header-text']}>
                 <span>{this.state.time}</span>
                 <img src={this.state.weatherUrl} alt=""/>
@@ -79,4 +80,4 @@ class Header extends PureComponent {
     )
   }
 }
-export default Header
+export default withRouter(Header)
