@@ -41,3 +41,11 @@ export const orderRoute = () => request.get("/order/backinfo");
 export const finishOrder = () => request.get("/finish/order");
 // 订单管理-订单详情
 export const orderDetail = (orderId) => request.get("/order/detail", {data: {orderId}});
+// 用户管理-用户列表
+export const userList = () => request.get("/user/list");
+// 用户管理-删除用户
+export const deleteUser = () => request.get("/delete/user");
+// 用户管理-更新用户信息
+export const updateUser = () => request.get("/update/user");
+// 用户管理-增加用户
+export const addUser = () => request.get("/add/user");
