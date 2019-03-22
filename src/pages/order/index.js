@@ -1,111 +1,157 @@
 import React, { PureComponent } from "react";
-import { Card, Button, Table, Form, Select, Modal, message, DatePicker  } from "antd";
+import { Card, Button, Table, Form, Modal, message } from "antd";
 import { orderList, orderRoute, finishOrder } from "@/api/index";
-import utils from "@/assets/utils/index"
+import BaseForm from "@/components/form/index";
+import utils from "@/assets/utils/index";
 import style from "./style.module.less";
 const FormItem = Form.Item;
-const Option = Select.Option;
 class Order extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       list: [],
       pagination: utils.pagination,
       visible: false,
       orderInfo: {},
       selectedItem: {},
-      selectedRowKeys: []
-    }
+      selectedRowKeys: [],
+      formList: [
+        {
+          type: "SELECT",
+          label: "城市",
+          field: "city",
+          placeholder: "全部",
+          initialValue: "1",
+          width: 80,
+          list: [
+            { id: "0", name: "全部" },
+            { id: "1", name: "北京" },
+            { id: "2", name: "天津" },
+            { id: "3", name: "上海" }
+          ]
+        },
+        {
+          type: "时间查询",
+          field: ['start-time','end-time']
+        },
+        {
+          type: "SELECT",
+          label: "订单状态",
+          field: "order_status",
+          placeholder: "全部",
+          initialValue: "1",
+          width: 80,
+          list: [
+            { id: "0", name: "全部" },
+            { id: "1", name: "进行中" },
+            { id: "2", name: "结束行程" }
+          ]
+        }
+      ]
+    };
   }
-  componentDidMount () {
-    this.getTableData()
+  componentDidMount() {
+    this.getTableData();
   }
-  
+
   // 获取表格数据
   getTableData = () => {
-    orderList().then((res) => {
-      console.log(res)
-      if (res.data.code === '0') {
-        res.data.data.item_list.map((item, index) => item.key = index)
-        this.setState({
-          list: res.data.data.item_list,
-          selectedRowKeys: []
-        })
-      } else {
-        message.error('请求失败，请重试')
-      }
-    }).catch((err) => {
-      message.error(`请求失败：${err}`)
-    })
-  }
+    orderList()
+      .then(res => {
+        console.log(res);
+        if (res.data.code === "0") {
+          res.data.data.item_list.map((item, index) => (item.key = index));
+          this.setState({
+            list: res.data.data.item_list,
+            selectedRowKeys: []
+          });
+        } else {
+          message.error("请求失败，请重试");
+        }
+      })
+      .catch(err => {
+        message.error(`请求失败：${err}`);
+      });
+  };
+
   // 点击关闭模态框
   handleCancel = () => {
     this.setState({
       visible: false
-    })
-  }
+    });
+  };
   // 点击确认结束订单
   handleFinishOrder = () => {
-    finishOrder().then((res) => {
-      console.log(res)
-      if (res.data.code === '0') {
-        message.success('订单终止成功')
-        this.setState({
-          visible: false
-        })
-        this.getTableData()
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
+    finishOrder()
+      .then(res => {
+        console.log(res);
+        if (res.data.code === "0") {
+          message.success("订单终止成功");
+          this.setState({
+            visible: false
+          });
+          this.getTableData();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  // 跳转到订单详情页
   openDetail = () => {
     let selectedItem = this.state.selectedItem;
     if (!selectedItem.id) {
       Modal.info({
-        title: '提示',
-        content: '请先选择一条订单'
-      })
-      return
+        title: "提示",
+        content: "请先选择一条订单"
+      });
+      return;
     }
-    window.location.href=`/order/detail-${selectedItem.id}.html`
-  }
+    window.location.href = `/order/detail-${selectedItem.id}.html`;
+  };
+  // 点击查询，刷新表格数据
+  handleFilter = params => {
+    console.log(params);
+    this.getTableData();
+  };
   // 点击打开对话框
   stopOrder = () => {
     let selectedItem = this.state.selectedItem;
     if (!selectedItem.id) {
       Modal.info({
-        title: '提示',
-        content: '请先选择一条订单'
-      })
-      return
+        title: "提示",
+        content: "请先选择一条订单"
+      });
+      return;
     }
-    orderRoute().then((res) => {
-      console.log(res)
-      if (res.data.code === '0') {
-        this.setState({
-          visible: true,
-          orderInfo: res.data.data
-        })
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
+    orderRoute()
+      .then(res => {
+        console.log(res);
+        if (res.data.code === "0") {
+          this.setState({
+            visible: true,
+            orderInfo: res.data.data
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   onTableClick = (record, index) => {
-    let selectKey = [index]
+    let selectKey = [index];
     this.setState({
       selectedRowKeys: selectKey,
       selectedItem: record
-    })
-  }
+    });
+  };
   onSelectChange = (selectedRowKeys, selectedRows) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ 
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    this.setState({
       selectedRowKeys,
       selectedItem: selectedRows[0]
     });
-  }
+  };
   render() {
     const columns = [
       {
@@ -163,21 +209,28 @@ class Order extends PureComponent {
       wrapperCol: {
         span: 18
       }
-    }
-    let { selectedRowKeys } = this.state
+    };
+    let { selectedRowKeys } = this.state;
     const rowSelection = {
-      type: 'radio',
+      type: "radio",
       selectedRowKeys,
       onChange: this.onSelectChange
-    }
+    };
     return (
       <div className={style.order}>
         <Card title="城市管理">
-          <FilterForm />
+          <BaseForm
+            formList={this.state.formList}
+            filterSubmit={this.handleFilter}
+          />
         </Card>
         <Card style={{ margin: "5px 0" }}>
-          <Button type="primary" onClick={this.openDetail}>订单详情</Button>
-          <Button type="primary" onClick={this.stopOrder}>结束订单</Button>
+          <Button type="primary" onClick={this.openDetail}>
+            订单详情
+          </Button>
+          <Button type="primary" onClick={this.stopOrder}>
+            结束订单
+          </Button>
         </Card>
         <div className="content-wrap">
           <Table
@@ -189,8 +242,8 @@ class Order extends PureComponent {
             onRow={(record, index) => {
               return {
                 onClick: () => {
-                  this.onTableClick(record, index)   // 点击行
-                },       
+                  this.onTableClick(record, index); // 点击行
+                }
               };
             }}
           />
@@ -221,48 +274,4 @@ class Order extends PureComponent {
     );
   }
 }
-class FilterForm extends React.Component {
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Form layout="inline">
-        <FormItem label="城市">
-          {getFieldDecorator("city_id")(
-            <Select style={{ width: 100 }} placeholder="全部">
-              <Option value="">全部</Option>
-              <Option value="1">北京市</Option>
-              <Option value="2">天津市</Option>
-              <Option value="3">深圳市</Option>
-            </Select>
-          )}
-        </FormItem>
-        <FormItem label="订单时间">
-          {getFieldDecorator("start_time")(
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>
-          )}
-          &nbsp;&nbsp;
-          {getFieldDecorator("end_time")(
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>
-          )}
-        </FormItem>
-        <FormItem label="订单状态">
-          {getFieldDecorator("op_mode")(
-            <Select style={{ width: 80 }} placeholder="全部">
-              <Option value="">全部</Option>
-              <Option value="1">进行中</Option>
-              <Option value="2">结束申请</Option>
-            </Select>
-          )}
-        </FormItem>
-        <FormItem>
-          <Button type="primary" style={{ margin: "0 20px" }}>
-            查询
-          </Button>
-          <Button>重置</Button>
-        </FormItem>
-      </Form>
-    );
-  }
-}
-FilterForm = Form.create({})(FilterForm);
 export default Order;
