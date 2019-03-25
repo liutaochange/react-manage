@@ -23,6 +23,9 @@ const City = lazy(() => import('@/pages/city/manage/index.js'));
 const Order = lazy(() => import('@/pages/order/index.js'));
 const User = lazy(() => import('@/pages/user/index.js'));
 const Bike = lazy(() => import('@/pages/bike/index.js'));
+const Bar = lazy(() => import('@/pages/echarts/bar/index'));
+const Pie = lazy(() => import('@/pages/echarts/pie/index'));
+const Line = lazy(() => import('@/pages/echarts/line/index'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -74,6 +77,9 @@ class Admin extends PureComponent {
                 <Route exact path="/order" component={props => <Order {...props} />} />
                 <Route exact path="/user" component={props => <User {...props} />} />
                 <Route exact path="/bikeMap" component={props => <Bike {...props} />} />
+                <Route exact path="/charts/bar" component={props => <Bar {...props} />} />
+                <Route exact path="/charts/pie" component={props => <Pie {...props} />} />
+                <Route exact path="/charts/line" component={props => <Line {...props} />} />
                 <Redirect to="/home" />
               </Switch>
             </Suspense>
