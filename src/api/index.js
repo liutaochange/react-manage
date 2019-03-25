@@ -53,3 +53,11 @@ export const addUser = () => request.get("/add/user");
 export const bikeMap = () => request.get("/bike/list");
 // 权限管理-权限列表
 export const roleList = () => request.get("/role/list");
+// 权限管理-角色创建
+export const createRole = () => request.get("/create/role");
+// 权限管理-权限设置
+export const permissionSet = () => request.get("/permission/set");
+// 权限管理-用户授权
+export const roleUserList = () => request.get("/role/userList");
+// 权限管理-用户授权更新
+export const roleUserUpdate = () => request.get("/role/userUpdate");
