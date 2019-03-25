@@ -51,3 +51,5 @@ export const updateUser = () => request.get("/update/user");
 export const addUser = () => request.get("/add/user");
 // 车辆管理-车辆地图
 export const bikeMap = () => request.get("/bike/list");
+// 权限管理-权限列表
+export const roleList = () => request.get("/role/list");

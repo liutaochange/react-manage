@@ -27,6 +27,7 @@ const Bar = lazy(() => import('@/pages/echarts/bar/index'));
 const Pie = lazy(() => import('@/pages/echarts/pie/index'));
 const Line = lazy(() => import('@/pages/echarts/line/index'));
 const Rich = lazy(() => import('@/pages/rich/index'));
+const Permission = lazy(() => import('@/pages/permission/index'));
 const { Sider, Content } = Layout;
 class Admin extends PureComponent {
   constructor(props) {
@@ -82,6 +83,7 @@ class Admin extends PureComponent {
                 <Route exact path="/charts/pie" component={props => <Pie {...props} />} />
                 <Route exact path="/charts/line" component={props => <Line {...props} />} />
                 <Route exact path="/rich" component={props => <Rich {...props} />} />
+                <Route exact path="/permission" component={props => <Permission {...props} />} />
                 <Redirect to="/home" />
               </Switch>
             </Suspense>
